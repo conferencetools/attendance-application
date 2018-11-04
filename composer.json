@@ -9,7 +9,6 @@
         "zendframework/zend-component-installer": "^1.0 || ^0.7 || ^1.0.0-dev@dev",
         "zendframework/zend-mvc": "^3.0.1",
         "zfcampus/zf-asset-manager": "^1.0",
-        "carnage/phactor": "dev-master",
         "conferencetools/attendance-module": "dev-master",
         "twbs/bootstrap": "4.1.3",
         "zendframework/zend-i18n": "^2.9",
