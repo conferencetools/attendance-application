@@ -8,7 +8,6 @@ return [
     'Zend\Navigation',
     'Zend\Serializer',
     'Zend\Log',
-    'AssetManager',
     'Zend\Router',
     'Zend\Validator',
     'Zend\Form',
