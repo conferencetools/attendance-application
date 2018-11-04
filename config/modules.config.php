@@ -16,8 +16,8 @@ return [
     //'Zend\I18n',
     'DoctrineModule',
     'DoctrineORMModule',
-    'Carnage\Phactor\Zend',
-    'Carnage\Phactor\Doctrine\Zend',
+    'Phactor\Zend',
+    'Phactor\Doctrine\Zend',
 
     'ZfrStripeModule',
     'ConferenceTools\Attendance',
