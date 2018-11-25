@@ -3,6 +3,7 @@
 include_once __DIR__ . '/../vendor/zfr/zfr-stripe-module/Module.php';
 
 return [
+    'Zend\Mail',
     'Zend\Mvc\Plugin\FlashMessenger',
     'Zend\Session',
     'Zend\Navigation',
