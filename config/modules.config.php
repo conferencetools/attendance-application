@@ -16,6 +16,7 @@ return [
     //'Zend\I18n',
     'DoctrineModule',
     'DoctrineORMModule',
+    'Carnage\ZendfonyCli',
     'Phactor\Zend',
     'Phactor\Doctrine\Zend',
 
