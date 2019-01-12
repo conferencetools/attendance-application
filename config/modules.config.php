@@ -22,4 +22,5 @@ return [
 
     'ZfrStripeModule',
     'ConferenceTools\Attendance',
+    'ConferenceTools\Authentication',
 ];

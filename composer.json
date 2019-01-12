@@ -10,6 +10,7 @@
         "zendframework/zend-mvc": "^3.0.1",
         "zfcampus/zf-asset-manager": "^1.0",
         "conferencetools/attendance-module": "dev-master",
+        "conferencetools/auth-module": "dev-master",
         "twbs/bootstrap": "4.1.3",
         "zendframework/zend-i18n": "^2.9",
         "zendframework/zend-log": "^2.10",
