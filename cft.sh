@@ -28,6 +28,7 @@ function dbreset(){
     #@TODO maybe make a copy and restore it instead
     docker exec -ti cft_app php /var/www/html/vendor/bin/doctrine-module orm:schema-tool:drop --force
     docker exec -ti cft_app php /var/www/html/vendor/bin/doctrine-module orm:schema-tool:create
+    docker exec -ti cft_app php /var/www/html/vendor/bin/doctrine-module dbal:run-sql "INSERT INTO User (username, password) values ('test', '\$2y\$10\$BH02IKtMgrey2KY3g5G.DOpIOtOPXz8uKxZnxTiYdph90JT/T0uz.')"
 }
 
 case "$1" in
