@@ -4,6 +4,25 @@
     "minimum-stability": "dev",
     "prefer-stable": true,
 
+    "repositories": [
+        {
+            "type": "package",
+            "package": {
+                "name": "guzzle/guzzle",
+                "version": "v3.9.3",
+                "source": {
+                    "type": "git",
+                    "url": "https://github.com/guzzle/guzzle3.git",
+                    "reference": "0645b70d953bc1c067bbc8d5bc53194706b628d9"
+                },
+                "dist": {
+                    "type": "zip",
+                    "url": "https://api.github.com/repos/guzzle/guzzle3/zipball/0645b70d953bc1c067bbc8d5bc53194706b628d9",
+                    "reference": "0645b70d953bc1c067bbc8d5bc53194706b628d9"
+                }
+            }
+        }
+    ],
     "require": {
         "php": "^7.2",
         "zendframework/zend-component-installer": "^1.0 || ^0.7 || ^1.0.0-dev@dev",
