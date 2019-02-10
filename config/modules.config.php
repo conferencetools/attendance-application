@@ -1,6 +1,4 @@
 <?php
-// Composer Autoloading isn't configured properly for this module :(
-include_once __DIR__ . '/../vendor/zfr/zfr-stripe-module/Module.php';
 
 return [
     'Zend\Mail',
@@ -19,8 +17,6 @@ return [
     'Carnage\ZendfonyCli',
     'Phactor\Zend',
     'Phactor\Doctrine\Zend',
-
-    'ZfrStripeModule',
     'ConferenceTools\Attendance',
     'ConferenceTools\Authentication',
 ];
