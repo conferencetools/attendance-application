@@ -17,6 +17,8 @@ return [
     'Carnage\ZendfonyCli',
     'Phactor\Zend',
     'Phactor\Doctrine\Zend',
+    'ConferenceTools\Admin',
     'ConferenceTools\Attendance',
     'ConferenceTools\Authentication',
+    'ConferenceTools\StripePaymentProvider',
 ];

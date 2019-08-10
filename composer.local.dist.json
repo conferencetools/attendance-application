@@ -1,0 +1,25 @@
+{
+    "repositories": [
+        {
+            "type": "path",
+            "url": "../attendance-module"
+        },
+        {
+            "type": "path",
+            "url": "../auth-module"
+        },
+        {
+            "type": "path",
+            "url": "../admin-module"
+        },
+        {
+            "type": "path",
+            "url": "../stripe-payment-provider-module"
+        }
+    ],
+    "config": {
+        "platform": {
+            "php": "7.2.1"
+        }
+    }
+}
