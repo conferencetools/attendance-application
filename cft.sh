@@ -35,6 +35,7 @@ function install() {
     [ -d ../admin-module ] || $(cd ../ && git clone git@github.com:conferencetools/admin-module.git)
     [ -d ../attendance-module ] || $(cd ../ && git clone git@github.com:conferencetools/attendance-module.git)
     [ -d ../auth-module ] || $(cd ../ && git clone git@github.com:conferencetools/auth-module.git)
+    [ -d ../stripe-payment-provider-module ] || $(cd ../ && git clone git@github.com:conferencetools/stripe-payment-provider-module.git)
 
     echo "+ Conference tools modules cloned, you may wish to manually run composer install in each to support IDE auto completion"
 
