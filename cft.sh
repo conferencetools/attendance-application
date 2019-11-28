@@ -3,6 +3,8 @@
 NETWORK="cft_network"
 APP_CONTAINER="cft_app"
 WEB_CONTAINER="cft_web"
+APP_IMAGE="php:7.3-fpm-alpine3.10-gd-mysql"
+WEB_IMAGE="nginx:1.17-alpine"
 
 function installComposer() {
     EXPECTED_SIGNATURE="$(wget -q -O - https://composer.github.io/installer.sig)"
@@ -28,7 +30,7 @@ function install() {
     command -v git >/dev/null 2>&1 || { echo >&2 "git is required to support local development of composer packages, please install using your OS package manager before continuing"; exit 1; }
 
     echo "+ Building development docker container"
-    docker build -t php:7.2-fpm-alpine3.7-gd-mysql -f dev/Dockerfile .
+    docker build -t $APP_IMAGE -f dev/Dockerfile .
 
     echo "+ Installing modules for local development"
 
@@ -76,9 +78,9 @@ function build() {
 
     docker network inspect $NETWORK > /dev/null 2>&1 || docker network create $NETWORK
     docker container inspect $APP_CONTAINER > /dev/null 2>&1 || docker container create --network $NETWORK --name $APP_CONTAINER -v `pwd`:$BASE_DIR $LINK_VOLUMES \
-        php:7.2-fpm-alpine3.7-gd-mysql
+        $APP_IMAGE
     docker container inspect $WEB_CONTAINER > /dev/null 2>&1 || docker container create --network $NETWORK --name $WEB_CONTAINER -p 8103:80 -v `pwd`:$BASE_DIR $LINK_VOLUMES \
-        nginx:1.13-alpine nginx -c /var/www/html/config/nginx.conf
+        $WEB_IMAGE nginx -c /var/www/html/config/nginx.conf
 
     up
 }

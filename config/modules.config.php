@@ -1,6 +1,7 @@
 <?php
 
-return [
+$modules = [
+    'BsbFlysystem',
     'Zend\Mail',
     'Zend\Mvc\Plugin\FlashMessenger',
     'Zend\Session',
@@ -18,7 +19,23 @@ return [
     'Phactor\Zend',
     'Phactor\Doctrine\Zend',
     'ConferenceTools\Admin',
-    'ConferenceTools\Attendance',
     'ConferenceTools\Authentication',
-    'ConferenceTools\StripePaymentProvider',
 ];
+
+$speakerModule = filter_var(getenv('ENABLE_SPEAKER_MODULE'), FILTER_VALIDATE_BOOLEAN, ['options' => ['default' => false]]);
+$attendanceModule = filter_var(getenv('ENABLE_ATTENDANCE_MODULE'), FILTER_VALIDATE_BOOLEAN, ['options' => ['default' => false]]);
+$stripeModule = filter_var(getenv('ENABLE_STRIPE_MODULE'), FILTER_VALIDATE_BOOLEAN, ['options' => ['default' => $attendanceModule]]);
+
+if ($attendanceModule) {
+    $modules[] = 'ConferenceTools\Attendance';
+}
+
+if ($stripeModule) {
+    $modules[] = 'ConferenceTools\StripePaymentProvider';
+}
+
+if ($speakerModule) {
+    $modules[] = 'ConferenceTools\Speakers';
+}
+
+return $modules;
