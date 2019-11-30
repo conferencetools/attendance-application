@@ -3,6 +3,14 @@
 use Doctrine\DBAL\Driver\PDOMySql\Driver as PDOMySqlDriver;
 
 return [
+    'conferencetools' => [
+        'payment_providers' => [
+            'stripe' => [
+                'secret_key' => getenv('STRIPE_SECRET_KEY'),
+                'publishable_key' => getenv('STRIPE_PUBLISHABLE_KEY'),
+            ]
+        ]
+    ],
     'doctrine' => [
         'connection' => [
             // default connection name
@@ -31,8 +39,5 @@ return [
             ],
         ],
     ],
-    'zfr_stripe' => array(
-        'secret_key' => getenv('STRIPE_SECRET_KEY'),
-        'publishable_key' => getenv('STRIPE_PUBLISHABLE_KEY'),
-    )
+
 ];

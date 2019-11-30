@@ -77,8 +77,8 @@ function build() {
     LINK_VOLUMES=`find vendor/ -type l -xtype d -exec bash -c 'for file in "${@:2}"; do echo -n "-v "; readlink -fn $file; echo -n ":$1$file "; done' bash $BASE_DIR {} +`
 
     docker network inspect $NETWORK > /dev/null 2>&1 || docker network create $NETWORK
-    docker container inspect $APP_CONTAINER > /dev/null 2>&1 || docker container create --network $NETWORK --name $APP_CONTAINER -v `pwd`:$BASE_DIR $LINK_VOLUMES \
-        $APP_IMAGE
+    docker container inspect $APP_CONTAINER > /dev/null 2>&1 || docker container create --network $NETWORK --name $APP_CONTAINER --env-file app.env \
+        -v `pwd`:$BASE_DIR $LINK_VOLUMES $APP_IMAGE
     docker container inspect $WEB_CONTAINER > /dev/null 2>&1 || docker container create --network $NETWORK --name $WEB_CONTAINER -p 8103:80 -v `pwd`:$BASE_DIR $LINK_VOLUMES \
         $WEB_IMAGE nginx -c /var/www/html/config/nginx.conf
 
@@ -124,56 +124,91 @@ function composer() {
     [ -e "composer.dev.lock" ] && rm composer.dev.lock
 }
 
+function env() {
+  case "$1" in
+    build)
+      build
+      exit 0
+      ;;
+
+    cleanup)
+      cleanup
+      exit 0
+      ;;
+
+    up)
+      up
+      exit 0
+      ;;
+
+    down)
+      down
+      exit 0
+      ;;
+
+    *)
+      echo "Usage: cft.sh env {build|cleanup|up|down}"
+      exit 1
+      ;;
+  esac
+}
+
+function db() {
+  case "$1" in
+  reset)
+    dbreset
+    exit 0
+    ;;
+
+  migrate)
+    dbmigrate
+    exit 0
+    ;;
+
+  diff)
+    dbdiff
+    exit 0
+    ;;
+
+  *)
+    echo "Usage: cft.sh db {reset|migrate|diff}"
+    exit 1
+    ;;
+  esac
+}
+
 case "$1" in
-build)
-build
-exit 0
-;;
+install)
+  install
+  exit 0
+  ;;
 
-cleanup)
-cleanup
-exit 0
-;;
+env)
+  shift
+  env "$@"
+  exit 0
+  ;;
 
-dbreset)
-dbreset
-exit 0
-;;
-
-dbmigrate)
-dbmigrate
-exit 0
-;;
-
-dbdiff)
-dbdiff
-exit 0
-;;
+db)
+  shift
+  db "$@"
+  exit 0
+  ;;
 
 runcron)
-runcron
-exit 0
-;;
+  runcron
+  exit 0
+  ;;
 
 composer)
-shift
-composer "$@"
-exit 0
-;;
-
-up)
-up
-exit 0
-;;
-
-down)
-down
-exit 0
-;;
+  shift
+  composer "$@"
+  exit 0
+  ;;
 
 *)
-echo "Usage: cft.sh {setup|cleanup|dbreset|dbmigrate|dbdiff|runcron|composer}"
-exit 1
-;;
+  echo "Usage: cft.sh {install|env|db|runcron|composer}"
+  exit 1
+  ;;
 
 esac

@@ -1,0 +1,68 @@
+<?php
+/**
+ * Local Configuration Override for DEVELOPMENT MODE.
+ *
+ * This configuration override file is for providing configuration to use while
+ * in development mode.
+ *
+ * You may also create files matching the glob pattern `{,*.}{global,local}-development.php`.
+ */
+
+return [
+    'doctrine' => [
+        'connection' => [
+            'orm_default' => [
+                'driverClass' => Doctrine\DBAL\Driver\PDOSqlite\Driver::class,
+                'params' => ['path'   => __DIR__ . '/../../data/db.sqlite'],
+            ]
+        ]
+    ],
+    'mail' => [
+        'type' => 'smtp',
+        'options' => [
+            'host' => 'smtp.gmail.com',
+            'port' => 465,
+            'connection_class' => 'plain',
+            'connection_config' => [
+                'username' => '',
+                'password' => '',
+                'ssl' => 'ssl',
+            ],
+        ],
+    ],
+    'conferencetools' => [
+        'mailconf' => [
+            'purchase' => [
+                'subject' => 'Your PHP Yorkshire Ticket Receipt',
+                'from' => 'info@phpyorkshire.co.uk',
+                'companyinfo' => 'PHP Yorkshire Ltd'
+            ],
+            'ticket' => [
+                'subject' => 'Your PHP Yorkshire Ticket',
+                'from' => 'info@phpyorkshire.co.uk',
+                'companyinfo' => 'PHP Yorkshire Ltd'
+            ],
+            'speaker-invite' => [
+                'subject' => 'You\'ve been accepted for PHP Yorkshire',
+                'from' => 'speakers@phpyorkshire.co.uk',
+                'companyinfo' => 'PHP Yorkshire Ltd'
+            ],
+        ],
+        'payment_providers' => [
+            'stripe' => [
+                'secret_key' => '',
+                'publishable_key' => '',
+            ]
+        ]
+    ],
+    'bsb_flysystem' => [
+        'adapters' => [
+            'speaker_files' => [
+                'type' => 'local',
+                'options' => [
+                    'root' => __DIR__ . '/../../data/files/'
+                ],
+            ],
+        ],
+    ],
+];
