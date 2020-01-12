@@ -38,6 +38,7 @@ function install() {
     [ -d ../attendance-module ] || $(cd ../ && git clone git@github.com:conferencetools/attendance-module.git)
     [ -d ../auth-module ] || $(cd ../ && git clone git@github.com:conferencetools/auth-module.git)
     [ -d ../stripe-payment-provider-module ] || $(cd ../ && git clone git@github.com:conferencetools/stripe-payment-provider-module.git)
+    [ -d ../messaging-module ] || $(cd ../ && git clone git@github.com:conferencetools/messaging-module.git)
 
     echo "+ Conference tools modules cloned, you may wish to manually run composer install in each to support IDE auto completion"
 
@@ -70,7 +71,7 @@ function down() {
     docker container stop $WEB_CONTAINER
 }
 
-function build() {
+function create() {
     MYSQL_PASS=`tr -cd '[:alnum:]' < /dev/urandom | fold -w30 | head -n1`
     BASE_DIR="/var/www/html/"
 
@@ -85,7 +86,7 @@ function build() {
     up
 }
 
-function cleanup(){
+function destroy(){
     down
 
     docker rm $APP_CONTAINER
@@ -126,13 +127,13 @@ function composer() {
 
 function env() {
   case "$1" in
-    build)
-      build
+    create)
+      create
       exit 0
       ;;
 
-    cleanup)
-      cleanup
+    destroy)
+      destroy
       exit 0
       ;;
 
@@ -147,7 +148,7 @@ function env() {
       ;;
 
     *)
-      echo "Usage: cft.sh env {build|cleanup|up|down}"
+      echo "Usage: cft.sh env {create|destroy|up|down}"
       exit 1
       ;;
   esac

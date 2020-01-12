@@ -1,4 +1,12 @@
 {
+    "require": {
+        "conferencetools/attendance-module": "*",
+        "conferencetools/auth-module": "*",
+        "conferencetools/admin-module": "*",
+        "conferencetools/stripe-payment-provider-module": "*",
+        "conferencetools/speakers-module": "*",
+        "conferencetools/messaging-module": "*"
+    },
     "repositories": [
         {
             "type": "path",
@@ -15,11 +23,15 @@
         {
             "type": "path",
             "url": "../stripe-payment-provider-module"
+        },
+        {
+            "type": "path",
+            "url": "../messaging-module"
         }
     ],
     "config": {
         "platform": {
-            "php": "7.2.1"
+            "php": "7.3.1"
         }
     }
 }
